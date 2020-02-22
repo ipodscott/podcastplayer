@@ -5,6 +5,23 @@ import 'package:webfeed/webfeed.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
+class Podcast with ChangeNotifier {
+  RssFeed _feed;
+  RssItem _selectedItem;
+
+  RssFeed get feed => _feed;
+  void parse(String xmlStr) {
+    _feed = RssFeed.parse(xmlStr);
+    notifyListeners();
+  }
+
+  RssItem get selectedItem => _selectedItem;
+  set selectedItem(RssItem value) {
+    _selectedItem = value;
+    notifyListeners();
+  }
+}
+
 final _putUpURL =
     'https://omny.fm/shows/rock-92/playlists/put-up-or-shut-up.rss';
 void main() => runApp(MyApp());

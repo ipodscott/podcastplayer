@@ -22,8 +22,7 @@ class Podcast with ChangeNotifier {
   }
 }
 
-final _putUpURL =
-    'https://omny.fm/shows/rock-92/playlists/put-up-or-shut-up.rss';
+final url = 'https://omny.fm/shows/rock-92/playlists/put-up-or-shut-up.rss';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -43,14 +42,14 @@ class EpisodesPage extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         body: FutureBuilder(
-            future: http.get(_putUpURL),
+            future: http.get(url),
             builder: (context, AsyncSnapshot<http.Response> snapshot) {
               if (snapshot.hasData) {
                 final response = snapshot.data;
                 if (response.statusCode == 200) {
                   final rssString = response.body;
                   var rssFeed = RssFeed.parse(rssString);
-                  return EpisodeListName(rssFeed: rssFeed);
+                  return EpisodeListView(rssFeed: rssFeed);
                 }
               } else {
                 return Center(
@@ -63,8 +62,8 @@ class EpisodesPage extends StatelessWidget {
   }
 }
 
-class EpisodeListName extends StatelessWidget {
-  const EpisodeListName({
+class EpisodeListView extends StatelessWidget {
+  const EpisodeListView({
     Key key,
     @required this.rssFeed,
   }) : super(key: key);
@@ -101,7 +100,13 @@ class PlayerPage extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text(item.title),
+          automaticallyImplyLeading: true,
+          title: Text(item.title,
+              style: TextStyle(
+                fontSize: 14.0,
+                color: Color(0xff999999),
+              )),
+          backgroundColor: Color(0xFF000000),
         ),
         body: Player(),
       ),

@@ -46,15 +46,51 @@ class EpisodesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Consumer<Podcast>(builder: (context, podcast, _) {
+        body: Stack(
+            children: <Widget>[
+        Consumer<Podcast>(builder: (context, podcast, _) {
           return podcast.feed != null
               ? EpisodeListView(rssFeed: podcast.feed)
               : Center(
                   child: CircularProgressIndicator(),
                 );
         }),
-      ),
-    );
+              Container(
+                child: Center(
+                  child: Column(
+                    children: <Widget>[
+                      Expanded(
+                        child: Center(
+                          child: Text('Hello, world!', style: TextStyle(color: Colors.white),),
+                        ),
+                      ),
+                      Expanded(
+                        child: Center(
+                          child: Text('Hello, world!', style: TextStyle(color: Colors.white),),
+                        ),
+                      ),
+                      Expanded(
+                        child: Center(
+                          child: Text('Hello, world!', style: TextStyle(color: Colors.white),),
+                        ),
+                      ),
+                      Expanded(
+                        child: Center(
+                          child: Text('Hello, world!', style: TextStyle(color: Colors.white),),
+                        ),
+                      ),
+                      Expanded(
+                        child: Center(
+                          child: Text('Hello, world!', style: TextStyle(color: Colors.white),),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                color: Colors.black,
+              ),
+      ]),
+    ),);
   }
 }
 
@@ -198,13 +234,13 @@ class _PlayBackButtonState extends State<PlaybackButton> {
             onChanged: null,
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Padding(
+              /*Padding(
                 padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                 child: IconButton(
                     icon: Icon(Icons.fast_rewind), onPressed: _rewind),
-              ),
+              ),*/
               IconButton(
                 icon: _isPlaying
                     ? Icon(Icons.pause_circle_outline)
@@ -217,11 +253,11 @@ class _PlayBackButtonState extends State<PlaybackButton> {
                   }
                 },
               ),
-              Padding(
+              /*Padding(
                 padding: const EdgeInsets.fromLTRB(10, 0, 1, 0),
                 child: IconButton(
                     icon: Icon(Icons.fast_forward), onPressed: _fastForward),
-              ),
+              ),*/
             ],
           ),
         ],
